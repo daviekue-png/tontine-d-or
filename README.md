@@ -8,6 +8,9 @@ synchronisation facultative entre les téléphones des membres.
 
 ## Télécharger
 
+**[Page de présentation](https://daviekue-png.github.io/tontine-d-or/)** — fonctions,
+écrans, tarifs, questions fréquentes.
+
 **[Télécharger la dernière version](https://github.com/daviekue-png/tontine-d-or/releases/latest/download/tontine-d-or.apk)**
 
 - Android 7 et plus (téléphone ou tablette)
