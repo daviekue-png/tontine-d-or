@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TONTINE D'OR — la tontine, enfin claire</title>
+<meta name="description" content="L'application de gestion de tontine qui fonctionne sans internet : membres, tours, versements, prêts, dépenses, reçus numérotés, journal des opérations. Essai gratuit de 30 jours.">
+<meta name="theme-color" content="#060503">
+<meta property="og:title" content="TONTINE D'OR — la tontine, enfin claire">
+<meta property="og:description" content="Membres, tours, versements, prêts, dépenses, reçus et journal : toute votre tontine dans un téléphone, même sans réseau.">
+<meta property="og:type" content="website">
+<link rel="icon" href="embleme.png">
+<style>
+  :root{
+    --or:#D4AF37; --or-clair:#F5D982; --or-fonce:#8C6A12;
+    --nuit:#060503; --nuit-2:#0B0904;
+    --bleu:#0B2A5B; --bleu-clair:#12386F;
+    --vert:#1E7A46; --vert-clair:#2FA35F;
+    --texte:#EDE7DA; --gris:#9C9486; --creme:#FDFBF3;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:
+      radial-gradient(1000px 520px at 50% -200px, rgba(212,175,55,.20), transparent 70%),
+      radial-gradient(700px 420px at 90% 40%, rgba(11,42,91,.55), transparent 72%),
+      var(--nuit);
+    color:var(--texte);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:var(--or-clair)}
+  .enveloppe{max-width:1080px;margin:0 auto;padding:0 20px}
+  .filet{height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,.45),transparent)}
+
+  /* ---------- barre ---------- */
+  .barre{
+    position:sticky;top:0;z-index:20;
+    backdrop-filter:blur(10px);
+    background:rgba(6,5,3,.72);
+    border-bottom:1px solid rgba(212,175,55,.14);
+  }
+  .barre .enveloppe{display:flex;align-items:center;gap:14px;height:58px}
+  .barre img{width:30px;height:30px;object-fit:contain}
+  .barre .nom{font-weight:800;letter-spacing:.08em;color:var(--or-clair);font-size:14px}
+  .barre nav{margin-left:auto;display:flex;gap:18px;font-size:14px}
+  .barre nav a{color:#CFC7B8;text-decoration:none}
+  .barre nav a:hover{color:var(--or-clair)}
+  @media(max-width:640px){ .barre nav{display:none} }
+
+  /* ---------- héros ---------- */
+  header{padding:64px 20px 26px;text-align:center;position:relative}
+  .halo{
+    position:absolute;inset:-120px 0 auto 0;height:520px;pointer-events:none;
+    background:radial-gradient(closest-side,rgba(212,175,55,.16),transparent 72%);
+  }
+  .logo{
+    width:min(250px,58vw);height:auto;
+    filter:drop-shadow(0 18px 40px rgba(0,0,0,.65));
+    animation:apparition .8s ease-out both, flotter 6s ease-in-out 1s infinite;
+  }
+  @keyframes apparition{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+  @keyframes flotter{
+    0%,100%{transform:translateY(0) rotate(0deg)}
+    50%{transform:translateY(-10px) rotate(-1.2deg)}
+  }
+  @media (prefers-reduced-motion: reduce){ .logo{animation:none} }
+
+  h1{font-size:clamp(28px,5.4vw,46px);letter-spacing:.07em;margin-top:18px;color:var(--or-clair);font-weight:800}
+  .slogan{color:var(--or);font-style:italic;margin-top:4px;font-size:clamp(15px,2.4vw,19px)}
+  .accroche{max-width:660px;margin:18px auto 0;font-size:clamp(15px,2.2vw,18px);color:#E4DDD0}
+
+  .zone-bouton{margin-top:30px;display:flex;flex-direction:column;align-items:center;gap:10px}
+  .bouton{
+    display:inline-flex;align-items:center;gap:12px;
+    background:linear-gradient(180deg,var(--or-clair),var(--or));
+    color:#1a1400;text-decoration:none;font-weight:800;font-size:18px;
+    padding:16px 34px;border-radius:14px;border:0;cursor:pointer;
+    box-shadow:0 12px 30px rgba(212,175,55,.30);
+    transition:transform .15s ease, box-shadow .2s ease;
+  }
+  .bouton:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(212,175,55,.44)}
+  .bouton svg{width:22px;height:22px;flex:none}
+  .bouton.discret{
+    background:transparent;color:var(--or-clair);
+    border:1px solid rgba(212,175,55,.45);box-shadow:none;font-size:15px;padding:12px 22px;
+  }
+  .bouton.discret:hover{background:rgba(212,175,55,.08)}
+  .details{font-size:13px;color:var(--gris)}
+  .empreinte{
+    font-family:ui-monospace,Consolas,monospace;font-size:11px;color:var(--gris);
+    word-break:break-all;max-width:620px;text-align:center;margin-top:2px;
+  }
+
+  .bandeau{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:10px;margin:40px auto 0;max-width:900px;
+  }
+  .bandeau div{
+    background:rgba(255,255,255,.03);border:1px solid rgba(212,175,55,.16);
+    border-radius:14px;padding:14px 10px;text-align:center;font-size:13px;color:#CFC7B8;
+  }
+  .bandeau strong{display:block;color:var(--or-clair);font-size:17px;margin-bottom:2px}
+
+  /* ---------- sections ---------- */
+  section{padding:52px 0}
+  h2{font-size:clamp(21px,3.6vw,30px);color:var(--or-clair);text-align:center;margin-bottom:8px}
+  .sous-titre{text-align:center;color:var(--gris);margin-bottom:30px;max-width:640px;margin-left:auto;margin-right:auto}
+  .grille{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  .carte{
+    background:linear-gradient(180deg,rgba(11,42,91,.72),rgba(11,42,91,.30));
+    border:1px solid rgba(212,175,55,.20);border-radius:16px;padding:20px;
+    transition:transform .18s ease,border-color .18s ease;
+  }
+  .carte:hover{transform:translateY(-3px);border-color:rgba(212,175,55,.42)}
+  .carte h3{font-size:16px;color:var(--or-clair);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+  .carte p{font-size:14px;color:#CFC7B8}
+  .puce{color:var(--vert-clair);font-weight:800}
+  .carte .ico{
+    width:34px;height:34px;flex:none;border-radius:10px;display:grid;place-items:center;
+    background:rgba(212,175,55,.12);color:var(--or-clair);
+  }
+  .carte .ico svg{width:19px;height:19px}
+
+  ol.etapes{counter-reset:e;list-style:none;display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+  ol.etapes li{
+    background:rgba(255,255,255,.03);border:1px solid rgba(212,175,55,.18);
+    border-radius:14px;padding:18px 18px 18px 60px;position:relative;font-size:14px;
+  }
+  ol.etapes li::before{
+    counter-increment:e;content:counter(e);
+    position:absolute;left:16px;top:16px;width:30px;height:30px;border-radius:50%;
+    background:var(--or);color:#1a1400;font-weight:800;display:grid;place-items:center;font-size:15px;
+  }
+
+  .prix{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  .prix .carte{text-align:center;position:relative}
+  .prix .vedette{border-color:var(--or);box-shadow:0 0 0 1px rgba(212,175,55,.35),0 18px 40px rgba(0,0,0,.5)}
+  .prix .etiquette{
+    position:absolute;top:-11px;left:50%;transform:translateX(-50%);
+    background:var(--or);color:#1a1400;font-size:11px;font-weight:800;
+    letter-spacing:.08em;padding:3px 12px;border-radius:999px;text-transform:uppercase;
+  }
+  .montant{font-size:32px;color:var(--or-clair);font-weight:800;margin:10px 0 2px}
+  .montant small{font-size:13px;color:var(--gris);font-weight:400}
+
+  .note{
+    margin-top:22px;padding:16px 18px;border-left:3px solid var(--or);
+    background:rgba(212,175,55,.06);border-radius:0 12px 12px 0;font-size:14px;color:#CFC7B8;
+  }
+  .note strong{color:var(--or-clair)}
+
+  .confiance{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .confiance .carte{background:linear-gradient(180deg,rgba(30,122,70,.20),rgba(30,122,70,.05));border-color:rgba(47,163,95,.35)}
+
+  details{
+    background:rgba(255,255,255,.03);border:1px solid rgba(212,175,55,.16);
+    border-radius:12px;padding:14px 18px;margin-bottom:10px;
+  }
+  details summary{cursor:pointer;font-weight:700;color:var(--or-clair);font-size:15px;list-style:none}
+  details summary::-webkit-details-marker{display:none}
+  details summary::before{content:"+ ";color:var(--or)}
+  details[open] summary::before{content:"− "}
+  details p{margin-top:10px;font-size:14px;color:#CFC7B8}
+
+  .final{
+    text-align:center;padding:54px 20px;
+    background:
+      radial-gradient(700px 300px at 50% 0%, rgba(212,175,55,.18), transparent 70%),
+      rgba(11,42,91,.28);
+    border-top:1px solid rgba(212,175,55,.18);
+    border-bottom:1px solid rgba(212,175,55,.18);
+  }
+  footer{padding:30px 20px 46px;text-align:center;color:var(--gris);font-size:13px}
+  footer strong{color:var(--or-clair)}
+  footer .legal{max-width:720px;margin:14px auto 0;font-size:12px;line-height:1.7;color:#8A8275}
+  .liens{margin-top:10px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<div class="barre">
+  <div class="enveloppe">
+    <img src="embleme.png" alt="">
+    <span class="nom">TONTINE D'OR</span>
+    <nav>
+      <a href="#fonctions">Fonctions</a>
+      <a href="#confiance">Confiance</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#installer">Installer</a>
+      <a href="#questions">Questions</a>
+    </nav>
+  </div>
+</div>
+
+<header>
+  <div class="halo"></div>
+  <img class="logo" src="embleme.png" alt="Emblème TONTINE D'OR">
+  <h1>TONTINE D'OR</h1>
+  <p class="slogan">Ensemble, nous grandissons.</p>
+  <p class="accroche">
+    Membres, tours, versements, prêts, dépenses, reçus numérotés et journal :
+    toute votre tontine dans un seul téléphone. <strong>Fonctionne sans internet</strong>,
+    et se synchronise quand le réseau revient.
+  </p>
+
+  <div class="zone-bouton">
+    <a class="bouton" id="telecharger" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/>
+      </svg>
+      Télécharger l'application
+    </a>
+    <p class="details" id="details">Android 7 et plus · APK universel · aucun compte à créer sur ce site</p>
+    <p class="empreinte" id="empreinte"></p>
+    <a class="bouton discret" href="#installer">Comment installer ?</a>
+  </div>
+
+  <div class="bandeau">
+    <div><strong>Sans internet</strong>Tout reste sur le téléphone</div>
+    <div><strong>Reçus numérotés</strong>Une preuve pour chaque franc</div>
+    <div><strong>Rôles séparés</strong>Chacun ne voit que sa tontine</div>
+    <div><strong>30 jours</strong>Essai gratuit, sans carte</div>
+  </div>
+</header>
+
+<div class="filet"></div>
+
+<section class="enveloppe" id="fonctions">
+  <h2>Ce que fait l'application</h2>
+  <p class="sous-titre">Pensée pour les tontines d'ici, pas pour les banques.</p>
+  <div class="grille">
+
+    <div class="carte">
+      <h3><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>Membres et fiches</h3>
+      <p>Chaque personne a sa fiche, son téléphone, sa photo si elle le souhaite. L'import de toute une tontine se fait en collant une liste ou un fichier Excel.</p>
+    </div>
+
+    <div class="carte">
+      <h3><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></svg></span>Tours et versements</h3>
+      <p>Le tour en cours, qui a cotisé, qui doit encore. Le trésorier saisit, l'application calcule la caisse, sans tableur et sans erreur de report.</p>
+    </div>
+
+    <div class="carte">
+      <h3><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10M7 13h6"/></svg></span>Prêts, remboursements, dépenses</h3>
+      <p>Tout mouvement est daté, motivé et signé par son auteur. Les pénalités de retard s'appliquent selon votre règlement, pas au hasard.</p>
+    </div>
+
+    <div class="carte">
+      <h3><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h9l5 5v15H6z"/><path d="M15 2v5h5"/><path d="M9 13h6M9 17h6"/></svg></span>Reçus numérotés</h3>
+      <p>Un reçu est émis à chaque versement, avec son numéro. On l'imprime ou on le partage : c'est la preuve que personne ne peut contester.</p>
+    </div>
+
+    <div class="carte">
+      <h3><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>Journal des opérations</h3>
+      <p>Qui a fait quoi, quand, et sur quelle tontine. Les enregistrements se verrouillent après clôture : on ne réécrit pas l'histoire.</p>
+    </div>
+
+    <div class="carte">
+      <h3><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg></span>Quatre rôles</h3>
+      <p>Super administrateur, administrateur, trésorier, membre. Chaque compte ne voit que sa tontine et les personnes qui y sont inscrites.</p>
+    </div>
+
+    <div class="carte">
+      <h3><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></span>Rappels</h3>
+      <p>Le téléphone rappelle les tours, les cotisations et les échéances de prêt. Le bureau n'a plus à courir après chacun pour lui dire que c'est son tour.</p>
+    </div>
+
+    <div class="carte">
+      <h3><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 20h8M12 18v2"/></svg></span>Tableau de bord</h3>
+      <p>Caisse nette, cotisations du tour, prêts en cours, dépenses du groupe : les chiffres du bureau tiennent sur un écran, à jour tout seuls.</p>
+    </div>
+
+    <div class="carte">
+      <h3><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg></span>Sauvegarde et export</h3>
+      <p>Une copie de vos données sur demande, un export Excel, des états imprimables. Vos données restent à vous, même après la fin de l'essai.</p>
+    </div>
+
+    <div class="carte">
+      <h3><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg></span>Hors ligne d'abord</h3>
+      <p>Une coupure de réseau ou de courant n'arrête rien. Le téléphone travaille seul et rattrape la synchronisation plus tard, sans doublon.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="filet"></div>
+
+<section class="enveloppe" id="confiance">
+  <h2>La confiance se prouve</h2>
+  <p class="sous-titre">Une tontine se tient sur la parole. L'application la transforme en preuves.</p>
+  <div class="confiance">
+    <div class="carte">
+      <h3><span class="puce">✓</span>Chaque ligne a un auteur</h3>
+      <p>Aucun enregistrement n'arrive sans savoir qui l'a créé. Une fiche sans auteur est signalée au bureau, pas cachée.</p>
+    </div>
+    <div class="carte">
+      <h3><span class="puce">✓</span>Rien ne s'efface en silence</h3>
+      <p>Une suppression laisse une trace et peut exiger l'accord d'un second responsable. Le journal, lui, ne se réécrit pas.</p>
+    </div>
+    <div class="carte">
+      <h3><span class="puce">✓</span>Chiffré avant de sortir</h3>
+      <p>Quand les données partent vers le serveur, elles sont chiffrées puis signées sur le téléphone. Le serveur transporte, il ne lit pas les noms ni les montants.</p>
+    </div>
+    <div class="carte">
+      <h3><span class="puce">✓</span>Un compte par personne</h3>
+      <p>Le numéro de téléphone sert d'identifiant. Les comptes ne se recopient pas d'un appareil à l'autre : celui qui entre le fait avec son propre accord.</p>
+    </div>
+  </div>
+</section>
+
+<div class="filet"></div>
+
+<section class="enveloppe" id="tarifs">
+  <h2>Combien ça coûte</h2>
+  <p class="sous-titre">Pas de commission sur votre caisse. Jamais.</p>
+  <div class="prix">
+    <div class="carte">
+      <h3>Essai</h3>
+      <div class="montant">30 jours</div>
+      <p>Toutes les fonctions, sans carte bancaire. À la fin, l'application passe en consultation : rien n'est perdu.</p>
+    </div>
+    <div class="carte vedette">
+      <span class="etiquette">Le plus choisi</span>
+      <h3>Une tontine</h3>
+      <div class="montant">5 000 F<small> / an</small></div>
+      <p>Ou 500 F par mois. Membres illimités, mises à jour comprises.</p>
+    </div>
+    <div class="carte">
+      <h3>Pack 3 tontines</h3>
+      <div class="montant">10 000 F<small> / an</small></div>
+      <p>Pour un gérant qui suit plusieurs groupes. Une licence par tontine, un seul paiement.</p>
+    </div>
+  </div>
+  <div class="note">
+    La licence est liée à <strong>la tontine</strong>, pas au téléphone : si le trésorier change
+    de téléphone, la licence le suit. Aucun prélèvement automatique, aucune commission sur
+    les cotisations.
+  </div>
+</section>
+
+<div class="filet"></div>
+
+<section class="enveloppe" id="installer">
+  <h2>Comment installer</h2>
+  <p class="sous-titre">Trois étapes, deux minutes, sans ordinateur.</p>
+  <ol class="etapes">
+    <li>Téléchargez le fichier <strong>.apk</strong> avec le bouton de cette page, directement depuis le téléphone qui servira.</li>
+    <li>Ouvrez le fichier téléchargé. Si Android demande l'autorisation, acceptez « Installer des applications inconnues » pour votre navigateur, puis revenez à l'écran d'installation.</li>
+    <li>Ouvrez TONTINE D'OR, créez votre compte, puis votre première tontine. Vous avez <strong>30 jours d'essai</strong>.</li>
+  </ol>
+  <div class="note">
+    L'application ne demande ni vos contacts, ni votre position, ni le micro. Seule la
+    connexion internet est utilisée, et seulement pour la synchronisation entre téléphones.
+    <strong>Une seule version est proposée au téléchargement</strong> : la dernière validée.
+    Comparez l'empreinte SHA-256 affichée sous le bouton avec celle du fichier reçu avant
+    d'installer une mise à jour.
+  </div>
+</section>
+
+<div class="filet"></div>
+
+<section class="enveloppe" id="questions">
+  <h2>Questions fréquentes</h2>
+  <p class="sous-titre">Ce qu'on nous demande le plus souvent.</p>
+
+  <details>
+    <summary>Faut-il internet pour utiliser l'application ?</summary>
+    <p>Non. Tout fonctionne sans réseau : créer la tontine, inscrire les membres, saisir les versements, imprimer les reçus. Internet ne sert qu'à faire circuler les informations entre les téléphones des membres, quand il est disponible.</p>
+  </details>
+
+  <details>
+    <summary>Un membre peut-il voir les données des autres tontines ?</summary>
+    <p>Non. Un compte ne voit que sa tontine et les personnes qui y sont inscrites. Un membre ne voit même que sa propre fiche ; le bureau voit l'ensemble de sa tontine.</p>
+  </details>
+
+  <details>
+    <summary>Comment un nouveau membre entre-t-il ?</summary>
+    <p>Le bureau lui donne un <strong>code d'invitation</strong> (valable 7 jours, une seule fois) ou lui fait scanner un <strong>QR code</strong>. La personne installe l'application, crée son compte avec son numéro de téléphone et son propre mot de passe, puis saisit le code. Aucun mot de passe ne circule.</p>
+  </details>
+
+  <details>
+    <summary>Que se passe-t-il après les 30 jours d'essai ?</summary>
+    <p>L'application passe en consultation seule : vous pouvez toujours consulter, exporter et imprimer vos données, mais plus rien n'est saisi. Prendre une licence réactive tout, sans perte.</p>
+  </details>
+
+  <details>
+    <summary>Mes données sont-elles revendues ?</summary>
+    <p>Non. Elles servent uniquement à faire fonctionner votre tontine. Elles sont chiffrées avant d'être envoyées, et vous pouvez en demander une copie complète à tout moment.</p>
+  </details>
+
+  <details>
+    <summary>Sur quels téléphones l'application fonctionne-t-elle ?</summary>
+    <p>Android 7 et plus, sur un téléphone ou une tablette. Le fichier proposé est universel : il contient tout ce qu'il faut pour les téléphones récents comme pour les plus anciens.</p>
+  </details>
+</section>
+
+<div class="final">
+  <img src="embleme.png" alt="" style="width:76px;height:auto;margin-bottom:12px">
+  <h2 style="margin-bottom:6px">Votre tontine mérite mieux qu'un cahier</h2>
+  <p class="sous-titre" style="margin-bottom:22px">Installez, essayez 30 jours, et jugez sur pièces.</p>
+  <a class="bouton" id="telecharger2" href="#">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/>
+    </svg>
+    Télécharger TONTINE D'OR
+  </a>
+  <p class="details" id="details2" style="margin-top:12px"></p>
+</div>
+
+<footer>
+  <p><strong>TONTINE D'OR</strong> — application de gestion de tontine · Bénin</p>
+  <p class="liens">
+    <a href="#tarifs">Tarifs</a>
+    <a href="#installer">Installer</a>
+    <a href="#questions">Questions</a>
+  </p>
+  <p class="legal">
+    Éditeur : TONTINE D'OR. Les mentions légales complètes (dénomination, RCCM, IFU,
+    adresse) seront publiées dès l'immatriculation de l'éditeur ; aucune donnée
+    d'entreprise n'est affichée tant qu'elle n'est pas officielle. Les données de
+    synchronisation sont hébergées par Supabase (Amazon Web Services, Union européenne)
+    et ne sont lisibles que sous forme chiffrée. Application éditée au Bénin, soumise au
+    Code du numérique.
+  </p>
+  <p style="margin-top:12px">© 2026 — Tous droits réservés.</p>
+</footer>
+
+<script>
+  // ---------------------------------------------------------------------
+  // La version publiée est décrite dans `version.json`, déposé à côté de
+  // cette page. Un seul fichier à mettre à jour à chaque livraison.
+  // ---------------------------------------------------------------------
+  const BOUTON = document.getElementById("telecharger");
+  const BOUTON2 = document.getElementById("telecharger2");
+  const DETAILS = document.getElementById("details");
+  const DETAILS2 = document.getElementById("details2");
+  const EMPREINTE = document.getElementById("empreinte");
+
+  function poids(octets) {
+    return (octets / 1048576).toFixed(1).replace(".", ",") + " Mo";
+  }
+
+  fetch("version.json", { cache: "no-store" })
+    .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+    .then((v) => {
+      const lien = v.fichier || "tontine-d-or.apk";
+      BOUTON.href = lien;
+      BOUTON2.href = lien;
+      const texte =
+        "Version " + v.version + " (build " + v.build + ") · Android 7 et plus · " +
+        poids(v.taille) + " · " + v.date;
+      DETAILS.textContent = texte;
+      DETAILS2.textContent = "Version " + v.version + " · " + poids(v.taille);
+      if (v.sha256) EMPREINTE.textContent = "SHA-256 : " + v.sha256;
+    })
+    .catch(() => {
+      // Pas de version.json (page ouverte hors du site) : on n'invente rien.
+      DETAILS.textContent = "Android 7 et plus · APK universel";
+    });
+</script>
+</body>
+</html>
