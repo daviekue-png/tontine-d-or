@@ -1,8 +1,8 @@
 {
-  "version": "1.5.0",
-  "build": "50",
-  "date": "30/10/2026",
-  "taille": 41264934,
-  "sha256": "0177A8379801CD31E994189395105B7970E65EC1B74D3099FD0E1EBC34E6EE93",
+  "version": "1.5.1",
+  "build": "51",
+  "date": "31/10/2026",
+  "taille": 41264870,
+  "sha256": "920BB0D87F0150CF381BCB5752A694F3555AB6CB0B6C4E8525CA2D0E97186FAF",
   "fichier": "https://github.com/daviekue-png/tontine-d-or/releases/latest/download/tontine-d-or.apk"
 }
