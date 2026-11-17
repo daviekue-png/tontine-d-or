@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Confidentialité — Ago</title>
+<meta name="description" content="Politique de confidentialité d'Ago, l'application de gestion de tontine : quelles données sont traitées, pourquoi, où elles vont, combien de temps elles sont conservées et comment exercer vos droits.">
+<meta name="theme-color" content="#060503">
+<meta property="og:title" content="Confidentialité — Ago">
+<meta property="og:description" content="Vos données, vos droits : la politique de confidentialité d'Ago, sans promesse exagérée.">
+<meta property="og:type" content="website">
+<link rel="icon" href="embleme.png">
+<style>
+  :root{
+    --or:#D4AF37; --or-clair:#F5D982; --or-fonce:#8C6A12;
+    --nuit:#060503; --nuit-2:#0B0904;
+    --bleu:#0B2A5B; --bleu-clair:#12386F;
+    --vert:#1E7A46; --vert-clair:#2FA35F;
+    --texte:#EDE7DA; --gris:#9C9486; --creme:#FDFBF3;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:
+      radial-gradient(1000px 520px at 50% -220px, rgba(212,175,55,.18), transparent 70%),
+      radial-gradient(700px 420px at 90% 30%, rgba(11,42,91,.50), transparent 72%),
+      var(--nuit);
+    color:var(--texte);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--or-clair)}
+  .enveloppe{max-width:900px;margin:0 auto;padding:0 20px}
+
+  .barre{
+    position:sticky;top:0;z-index:20;
+    backdrop-filter:blur(10px);
+    background:rgba(6,5,3,.82);
+    border-bottom:1px solid rgba(212,175,55,.14);
+  }
+  .barre .enveloppe{display:flex;align-items:center;gap:14px;height:58px;max-width:1080px}
+  .barre img{width:30px;height:30px;object-fit:contain}
+  .barre .nom{font-weight:800;letter-spacing:.08em;color:var(--or-clair);font-size:14px}
+  .barre nav{margin-left:auto;display:flex;gap:18px;font-size:14px}
+  .barre nav a{color:#CFC7B8;text-decoration:none}
+  .barre nav a:hover{color:var(--or-clair)}
+
+  header{padding:56px 20px 18px;text-align:center}
+  header h1{font-size:clamp(26px,5vw,38px);letter-spacing:.04em;color:var(--or-clair);font-weight:800}
+  header p{max-width:660px;margin:12px auto 0;color:#E4DDD0;font-size:15px}
+  .version{display:inline-block;margin-top:16px;padding:4px 12px;border-radius:999px;
+    background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.28);
+    color:var(--or-clair);font-size:12px;letter-spacing:.03em}
+
+  article{padding:10px 20px 40px}
+  section{padding:26px 0;border-top:1px solid rgba(212,175,55,.12)}
+  section:first-of-type{border-top:0}
+  h2{font-size:20px;color:var(--or-clair);margin-bottom:10px}
+  h3{font-size:15px;color:var(--or-clair);margin:18px 0 6px}
+  p{margin:8px 0;font-size:14.5px;color:#DDD6C9}
+  ul{margin:8px 0 8px 22px;font-size:14.5px;color:#DDD6C9}
+  li{margin:4px 0}
+  strong{color:var(--creme)}
+
+  .encadre{
+    margin:16px 0;padding:16px 18px;border-left:3px solid var(--or);
+    background:rgba(212,175,55,.06);border-radius:0 12px 12px 0;font-size:14px;color:#CFC7B8;
+  }
+  .encadre strong{color:var(--or-clair)}
+  .encadre.vert{border-left-color:var(--vert-clair);background:rgba(47,163,95,.08)}
+  .encadre.rouge{border-left-color:#C0554A;background:rgba(192,85,74,.08)}
+
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid rgba(212,175,55,.14);vertical-align:top}
+  th{color:var(--or-clair);font-weight:700;background:rgba(212,175,55,.05)}
+  td{color:#DDD6C9}
+  @media(max-width:640px){
+    .barre nav a:first-child{display:none}
+    table,thead,tbody,tr,th,td{display:block}
+    thead{display:none}
+    tr{border:1px solid rgba(212,175,55,.14);border-radius:10px;margin-bottom:8px;padding:6px 8px}
+    td{border:0;padding:4px 4px}
+    td:first-child{color:var(--or-clair);font-weight:700}
+  }
+
+  footer{padding:34px 20px 50px;text-align:center;color:var(--gris);font-size:13px;
+    border-top:1px solid rgba(212,175,55,.14)}
+  footer strong{color:var(--or-clair)}
+  footer .legal{max-width:720px;margin:14px auto 0;font-size:12px;line-height:1.7;color:#8A8275}
+  .liens{margin-top:10px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<div class="barre">
+  <div class="enveloppe">
+    <img src="embleme.png" alt="">
+    <span class="nom">Ago</span>
+    <nav>
+      <a href="index.html">La vitrine</a>
+      <a href="index.html#tarifs">Tarifs</a>
+      <a href="#suppression">Supprimer mon compte</a>
+    </nav>
+  </div>
+</div>
+
+<header>
+  <div class="enveloppe">
+    <h1>Confidentialité</h1>
+    <p>Ce que l'application fait de vos données, ce qu'elle ne fait pas, et comment reprendre la main. Écrit pour être lu, pas pour protéger l'éditeur.</p>
+    <span class="version">Version 2 — 17 novembre 2026</span>
+  </div>
+</header>
+
+<article class="enveloppe">
+
+<section id="responsable">
+  <h2>1. Qui est responsable de vos données</h2>
+  <p>Deux acteurs interviennent, et il faut les distinguer :</p>
+  <table>
+    <thead><tr><th>Situation</th><th>Responsable</th><th>Rôle</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Les données de <strong>votre tontine</strong> (membres, cotisations, prêts, photos)</td>
+        <td><strong>Le bureau de votre tontine</strong>, dont les coordonnées figurent dans l'application</td>
+        <td>Il décide quelles données sont saisies et pourquoi</td>
+      </tr>
+      <tr>
+        <td>Les données de <strong>votre compte Ago</strong> (licence, contrat, assistance)</td>
+        <td><strong>L'éditeur d'Ago</strong></td>
+        <td>Il gère la relation commerciale et l'hébergement</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Pour les données hébergées sur son serveur, l'éditeur agit comme <strong>sous-traitant</strong> du bureau de la tontine, au sens du Livre V du Code du numérique.</p>
+  <div class="encadre">
+    <strong>Contact données personnelles :</strong> <a href="mailto:davi.ekue@gmail.com">davi.ekue@gmail.com</a>.
+    Vous pouvez aussi écrire depuis l'application : ☰ → <strong>Assistance</strong>.
+  </div>
+  <p>L'identité complète de l'éditeur (dénomination, RCCM, IFU, adresse) sera publiée dès son immatriculation. Aucune donnée d'entreprise n'est affichée tant qu'elle n'est pas officielle.</p>
+</section>
+
+<section id="donnees">
+  <h2>2. Quelles données sont traitées</h2>
+  <table>
+    <thead><tr><th>Donnée</th><th>Obligatoire ?</th><th>Pourquoi</th></tr></thead>
+    <tbody>
+      <tr><td>Nom et prénoms</td><td>Oui</td><td>Identifier le membre dans les comptes</td></tr>
+      <tr><td>Numéro de téléphone</td><td>Oui</td><td>Identifiant de connexion, contact</td></tr>
+      <tr><td><strong>Photo de profil</strong></td><td><strong>Non — entièrement facultative</strong></td><td>Reconnaître la personne dans la liste</td></tr>
+      <tr><td>Cotisations, prêts, remboursements, pénalités</td><td>Oui</td><td>Tenue de la comptabilité de la tontine</td></tr>
+      <tr><td>Reçus et journal des opérations</td><td>Oui</td><td>Preuve, traçabilité, prévention des litiges</td></tr>
+      <tr><td>Identifiant et mot de passe (haché)</td><td>Oui</td><td>Sécuriser l'accès au compte</td></tr>
+      <tr><td>Pièce d'identité du gérant (vérification)</td><td>Oui, pour le badge</td><td>Établir l'identité du gérant</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Refuser de fournir une photo ne prive d'aucun service et ne bloque aucune fonction.</strong> L'application affiche alors l'initiale du nom.</p>
+  <p>Aucune donnée sensible au sens du Code (santé, religion, opinions, origine) n'est demandée. Aucun traceur publicitaire n'est intégré. Aucune donnée n'est vendue ni louée.</p>
+</section>
+
+<section id="pourquoi">
+  <h2>3. Pourquoi ces données sont traitées, et sur quelle base</h2>
+  <table>
+    <thead><tr><th>Finalité</th><th>Base légale</th></tr></thead>
+    <tbody>
+      <tr><td>Tenir les comptes de la tontine et produire les reçus</td><td>Exécution du contrat qui vous lie à la tontine</td></tr>
+      <tr><td>Identifier les membres et sécuriser les accès</td><td>Exécution du contrat</td></tr>
+      <tr><td>Prévenir et trancher les litiges</td><td>Intérêt légitime : la preuve</td></tr>
+      <tr><td>Afficher la photo choisie</td><td><strong>Consentement</strong> (art. 389 et 390)</td></tr>
+      <tr><td>Synchroniser les données vers le serveur</td><td><strong>Consentement</strong>, donné avant la première synchronisation</td></tr>
+      <tr><td>Gérer la licence et le contrat du gérant</td><td>Exécution du contrat</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="qui-voit">
+  <h2>4. Qui peut voir vos données</h2>
+  <ul>
+    <li><strong>Le bureau de votre tontine</strong>, selon son rôle : le gérant voit sa tontine, le trésorier voit les opérations, un membre ne voit que ce qui le concerne.</li>
+    <li><strong>Vous-même</strong>, pour toutes les données qui vous concernent.</li>
+    <li><strong>L'éditeur</strong>, pour l'hébergement et l'assistance, dans la limite de ce qui est nécessaire.</li>
+    <li><strong>Supabase</strong>, hébergeur technique, agissant comme <strong>sous-traitant ultérieur</strong>.</li>
+    <li><strong>Aucun autre destinataire.</strong> Aucune revente, aucune location, aucune communication à des fins publicitaires.</li>
+  </ul>
+  <p>L'application ne montre à chaque personne que les tontines auxquelles elle participe. Les échanges directs entre membres ne sont ouverts qu'après acceptation, et un tiers n'y a pas accès.</p>
+</section>
+
+<section id="ou">
+  <h2>5. Où vont vos données</h2>
+  <ul>
+    <li><strong>Sur votre téléphone</strong>, dans une base locale : c'est le fonctionnement normal, y compris sans internet.</li>
+    <li><strong>Sur le serveur</strong>, uniquement si la synchronisation est activée. Les données sensibles y sont stockées <strong>chiffrées</strong>.</li>
+    <li><strong>Pays d'hébergement :</strong> <strong>Irlande (Union européenne)</strong> — région Amazon Web Services <code>eu-west-1</code> du projet Supabase.</li>
+  </ul>
+  <p>L'hébergement étant situé <strong>hors de l'espace UEMOA</strong>, le transfert est soumis à l'<strong>autorisation préalable de l'APDP</strong> (art. 406.7 du Code du numérique) et suppose votre <strong>information et votre consentement</strong> (art. 415.14 et 416.5). Cette autorisation n'a pas encore été déposée : sa référence sera publiée ici dès qu'elle sera délivrée.</p>
+</section>
+
+<section id="duree">
+  <h2>6. Combien de temps les données sont conservées</h2>
+  <table>
+    <thead><tr><th>Donnée</th><th>Durée</th></tr></thead>
+    <tbody>
+      <tr><td>Comptes et fiches membres</td><td>Pendant l'utilisation de la tontine</td></tr>
+      <tr><td>Opérations, reçus, journal</td><td>Pendant la durée d'utilisation, puis selon les obligations comptables applicables</td></tr>
+      <tr><td>Photo de profil</td><td>Jusqu'à son retrait par la personne ou le bureau</td></tr>
+      <tr><td>Contrat et preuves de licence</td><td>Pendant la relation commerciale, puis selon les obligations légales</td></tr>
+      <tr><td>Pièce d'identité du gérant</td><td>Le temps de la vérification, puis suppression</td></tr>
+    </tbody>
+  </table>
+  <p>Les durées précises seront arrêtées avec un juriste avant l'ouverture commerciale ; elles seront alors publiées dans une nouvelle version de cette page. À l'expiration, les données sont supprimées ou rendues anonymes. Les données comptables peuvent être conservées plus longtemps si la loi l'exige ; elles sont alors limitées à ce qui est nécessaire.</p>
+</section>
+
+<section id="droits">
+  <h2>7. Vos droits</h2>
+  <p>Vous pouvez, à tout moment et sans justification :</p>
+  <ul>
+    <li><strong>accéder</strong> aux données qui vous concernent ;</li>
+    <li>demander leur <strong>rectification</strong> ;</li>
+    <li>demander leur <strong>effacement</strong>, dans les limites des obligations comptables ;</li>
+    <li><strong>vous opposer</strong> à un traitement ;</li>
+    <li><strong>retirer votre consentement</strong>, notamment pour la photo et la synchronisation, sans que cela remette en cause ce qui a été fait avant ;</li>
+    <li>demander une <strong>copie</strong> de vos données, que l'application sait exporter.</li>
+  </ul>
+  <p><strong>Comment :</strong> auprès du bureau de votre tontine, ou à <a href="mailto:davi.ekue@gmail.com">davi.ekue@gmail.com</a>. Une réponse vous est apportée dans un délai de <strong>30 jours</strong>.</p>
+  <p>Si vous estimez que vos droits ne sont pas respectés, vous pouvez saisir l'<strong>Autorité de Protection des Données Personnelles (APDP)</strong> :</p>
+  <div class="encadre">
+    Rue 6.076, Aïdjèdo, Immeuble El MARZOUK Joël, 01 BP 04837 Cotonou<br>
+    Téléphone : +229 21 32 57 88 / 69 55 00 00 — <a href="mailto:contact@apdp.bj">contact@apdp.bj</a>
+  </div>
+</section>
+
+<section id="suppression">
+  <h2>8. Supprimer votre compte et vos données</h2>
+  <p><strong>Retirer le compte de ce téléphone.</strong> ☰ → <strong>Mon compte</strong> → <strong>Supprimer mon compte</strong>. Le compte de connexion est retiré de l'appareil et vous êtes déconnecté. La fiche membre, les cotisations et les opérations de la tontine restent : elles appartiennent à la tontine et servent de preuve aux autres membres.</p>
+  <p><strong>Demander l'effacement de vos données personnelles.</strong> Écrivez à <a href="mailto:davi.ekue@gmail.com">davi.ekue@gmail.com</a> en précisant votre identifiant et la tontine concernée, ou adressez-vous au bureau de votre tontine. La demande est vérifiée, puis traitée par le bureau et l'éditeur dans un délai de <strong>30 jours</strong>. Si vous n'avez plus accès à l'application, le même courriel suffit.</p>
+  <h3>Ce qui est effacé</h3>
+  <ul>
+    <li>le compte de connexion et ses identifiants ;</li>
+    <li>le nom, le numéro de téléphone et la photo, dans la mesure où les obligations comptables permettent de les retirer ;</li>
+    <li>les échanges directs et les demandes de contact.</li>
+  </ul>
+  <h3>Ce qui est conservé, et pourquoi</h3>
+  <p>Les <strong>cotisations, reçus et écritures comptables</strong> restent attachés à la fiche membre de la tontine : ils appartiennent à la comptabilité de la tontine et peuvent être exigés en cas de litige ou par obligation légale. Ils ne disparaissent pas avec le compte, mais ne sont plus accessibles depuis une connexion personnelle.</p>
+  <p>Le journal des opérations conserve l'historique des actes (qui, quoi, quand), nécessaire à la preuve et à la prévention des contestations. Les copies de sauvegarde du serveur sont remplacées selon leur cycle de rotation ; la suppression y devient effective à ce moment-là.</p>
+</section>
+
+<section id="securite">
+  <h2>9. Sécurité — ce qui est fait, et ce qui n'est pas promis</h2>
+  <p><strong>Mesures en place :</strong> mots de passe hachés avec sel, contrôle d'accès par rôle, journal des opérations, verrouillage après clôture, chiffrement des données envoyées au serveur, photos facultatives, aucune publicité.</p>
+  <div class="encadre rouge">
+    <strong>Limite honnête.</strong> Le chiffrement des échanges repose sur une clé intégrée à l'application. Il protège les données en transit et au repos sur le serveur contre une lecture directe de la base, mais <strong>ce n'est pas un chiffrement de bout en bout</strong> : une personne qui disposerait de l'application, de votre téléphone déverrouillé et de compétences techniques pourrait lire certaines données. Aucune sécurité n'est absolue.
+  </div>
+  <p>En cas d'incident, l'éditeur informe l'APDP et les personnes concernées dans les conditions prévues par le Code.</p>
+</section>
+
+<section id="mineurs">
+  <h2>10. Mineurs</h2>
+  <p>Le service est destiné aux personnes majeures. Un membre mineur ne peut être enregistré qu'avec l'accord de son représentant légal.</p>
+</section>
+
+<section id="modifications">
+  <h2>11. Modifications</h2>
+  <p>Toute modification substantielle est présentée dans l'application avant d'être appliquée. La version et la date figurent en tête de cette page. La version de référence, signée et jointe au dossier APDP, reste le document <code>POLITIQUE_CONFIDENTIALITE.md</code> du dépôt.</p>
+</section>
+
+</article>
+
+<footer>
+  <p><strong>Ago</strong> — la cour des tontines · Bénin</p>
+  <p class="liens">
+    <a href="index.html">La vitrine</a>
+    <a href="index.html#tarifs">Tarifs</a>
+    <a href="index.html#questions">Questions</a>
+    <a href="mailto:davi.ekue@gmail.com">Nous écrire</a>
+  </p>
+  <p class="legal">
+    Éditeur : Ago. Les mentions légales complètes (dénomination, RCCM, IFU,
+    adresse) seront publiées dès l'immatriculation de l'éditeur ; aucune donnée
+    d'entreprise n'est affichée tant qu'elle n'est pas officielle. Les données de
+    synchronisation sont hébergées par Supabase (Amazon Web Services, Union européenne)
+    et ne sont lisibles que sous forme chiffrée. Application éditée au Bénin, soumise au
+    Code du numérique.
+  </p>
+  <p style="margin-top:12px">© 2026 — Tous droits réservés.</p>
+</footer>
+
+</body>
+</html>
